@@ -1,2 +1,2 @@
-#FoodPanda Application
+FoodPanda Application
 

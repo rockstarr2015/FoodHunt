@@ -1,25 +1,36 @@
 
-var app = {
-    initialize: function() {
-        this.bindEvents();
-    },
-    
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-   
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
 
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+var getLocation = function(){
+    return new Promise((resolve,reject)=>{
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+        $.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCwvRpYYHOPhZCAXX-rCqFNfdGcr-tnYbo", (data)=>{
+            if(data){
+                resolve(data);
+            }
+            else{
+                reject("error");
+            }
+        })
 
-        console.log('Received Event: ' + id);
+    })
+}
+
+var initMap = function(){
+    getLocation().then((location)=>{
+        if(location){
+            drawMap(location);
+        }
+    });
+
+    function drawMap(location){
+        var mapOptions = {
+            center: {lat: location.location.lat, lng: location.location.lng},
+            zoom: 13 
+        };
+
+        var map = new google.maps.Map(document.getElementById("map"),mapOptions);
     }
-};
+}
+
+
+
