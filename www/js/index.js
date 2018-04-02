@@ -1,36 +1,41 @@
 
 
-var getLocation = function(){
+function findLocation(){
     return new Promise((resolve,reject)=>{
+        navigator.geolocation.getCurrentPosition((location)=>{
+            if(location){
+                resolve(location.coords);
 
-        $.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyCwvRpYYHOPhZCAXX-rCqFNfdGcr-tnYbo", (data)=>{
-            if(data){
-                resolve(data);
             }
             else{
                 reject("error");
             }
         })
-
     })
+    
 }
 
 var initMap = function(){
-    getLocation().then((location)=>{
-        if(location){
-            drawMap(location);
-        }
+ 
+    findLocation().then((data)=>{
+       return drawMap(data);
     });
 
     function drawMap(location){
+
         var mapOptions = {
-            center: {lat: location.location.lat, lng: location.location.lng},
+            center: {lat:location.latitude , lng: location.longitude},
             zoom: 13 
         };
-
+        
         var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+
     }
+
+
 }
+
+
 
 
 

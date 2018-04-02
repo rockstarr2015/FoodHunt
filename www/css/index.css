@@ -42,13 +42,13 @@ body {
 
 #PageHeader{
     height:50px;
-    background-color: #008e76;
+    background-color:white ;
 
 }
 
 #appHeader{
     font-size: 190%;
-    color:white;
+    color:#008e76;
     font-weight: bold;
     font-family: Georgia, serif;
     text-shadow: 1px 1px 1px solid black;

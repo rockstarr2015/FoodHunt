@@ -1,25 +1,41 @@
 
-var app = {
-    initialize: function() {
-        this.bindEvents();
-    },
+
+function findLocation(){
+    return new Promise((resolve,reject)=>{
+        navigator.geolocation.getCurrentPosition((location)=>{
+            if(location){
+                resolve(location.coords);
+
+            }
+            else{
+                reject("error");
+            }
+        })
+    })
     
-    bindEvents: function() {
-        document.addEventListener('deviceready', this.onDeviceReady, false);
-    },
-   
-    onDeviceReady: function() {
-        app.receivedEvent('deviceready');
-    },
+}
 
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+var initMap = function(){
+ 
+    findLocation().then((data)=>{
+       return drawMap(data);
+    });
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+    function drawMap(location){
 
-        console.log('Received Event: ' + id);
+        var mapOptions = {
+            center: {lat:location.latitude , lng: location.longitude},
+            zoom: 13 
+        };
+        
+        var map = new google.maps.Map(document.getElementById("map"),mapOptions);
+
     }
-};
+
+
+}
+
+
+
+
+
