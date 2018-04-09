@@ -304,8 +304,6 @@ var initMap = function(){
             //adding markert to map
             marker.addListener('click', function(event) {
                 
-                console.log("marker is clicked...");
-                //display the data 
                 displayInfo(data);
                
             });
@@ -321,8 +319,14 @@ var initMap = function(){
 
 var displayInfo = function(data){
 
-    console.log(data.name);
-    console.log("displaying marker information");
+  console.log(data);
+  $("#popup").css({
+    "display":"block",
+    "animation": "popupOpen 2s",
+    "animation-fill-mode": "forwards"
+  })
+
+    
 }
 
 

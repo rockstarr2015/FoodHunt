@@ -66,8 +66,45 @@ body {
 
 #map{
     width:100vw;
-    height:100%;
+    height:100vh;
 }
 
+#popup{
+    display: none;
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    top: 100vh;
+    left: 0;
+    background-color: white;
+    animation: popupOpen 4s;
+   
+}
+
+@keyframes popupOpen{
+    from{
+        top: 100vh;
+    }
+    to{
+        top: 0vh;
+    }
+
+}
+
+@keyframes popupClose{
+    from{
+        top: 0vh;
+    }
+    to{
+        top: 100vh;
+    }
+}
+
+
+#closeButton{
+    position:absolute;
+    top:0;
+    left:0;
+}
 
 
